@@ -22,3 +22,6 @@ yarn-error.log*
 
 # local env
 .env*.local
+
+# design reference — never commit
+public/reference/
