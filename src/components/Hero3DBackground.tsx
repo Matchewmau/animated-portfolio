@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Stars } from "@react-three/drei";
+import { useReducedMotion } from "motion/react";
 import type { Mesh } from "three";
 
 function SpinningKnot() {
@@ -23,7 +24,38 @@ function SpinningKnot() {
   );
 }
 
+function StaticFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-accent/10 via-transparent to-paper"
+    />
+  );
+}
+
 export default function Hero3DBackground() {
+  const shouldReduceMotion = useReducedMotion();
+  const [isCoarseOrSmall, setIsCoarseOrSmall] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const query = window.matchMedia("(pointer: coarse)");
+    const check = () => {
+      setIsCoarseOrSmall(query.matches || window.innerWidth < 768);
+    };
+    check();
+    query.addEventListener("change", check);
+    window.addEventListener("resize", check);
+    return () => {
+      query.removeEventListener("change", check);
+      window.removeEventListener("resize", check);
+    };
+  }, []);
+
+  if (shouldReduceMotion || isCoarseOrSmall) {
+    return <StaticFallback />;
+  }
+
   return (
     <div
       aria-hidden="true"
