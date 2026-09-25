@@ -13,7 +13,7 @@ export default function SelectedWork() {
           <SectionHeading
             eyebrow="Selected work"
             title="Production apps, not demos"
-            description="Three shipped projects with real users, payments, and measurable outcomes."
+            description="Featured production work with real users and measurable outcomes."
           />
         </ScrollReveal>
         <div className="mt-10 grid gap-6 md:grid-cols-2">

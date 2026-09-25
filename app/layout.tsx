@@ -1,12 +1,41 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { siteUrl, siteName, siteDescription } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "JOHN MATHEW B. MAURICIO — Full-Stack + AI Systems",
-  description:
-    "Portfolio of John Mauricio, Full-Stack Software Engineer building web and AI systems including HairMixer (ECAI 2026), PConnect, and TJ Fitness.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} — Portfolio`,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName,
+    title: `${siteName} — Portfolio`,
+    description: siteDescription,
+    images: [
+      {
+        url: "/og-cover.png",
+        width: 1200,
+        height: 630,
+        alt: `${siteName} — portfolio cover`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteName} — Portfolio`,
+    description: siteDescription,
+    images: ["/og-cover.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

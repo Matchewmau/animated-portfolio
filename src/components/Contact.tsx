@@ -1,5 +1,6 @@
 import { profile } from "@/content/profile";
 import SectionHeading from "@/components/SectionHeading";
+import CopyEmailButton from "@/components/CopyEmailButton";
 
 export default function Contact() {
   return (
@@ -33,6 +34,7 @@ export default function Contact() {
           >
             GitHub
           </a>
+          <CopyEmailButton email={profile.email} />
         </div>
         <p className="mt-6 text-sm text-muted">
           <a href={`mailto:${profile.email}`} className="hover:text-accent">
