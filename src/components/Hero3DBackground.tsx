@@ -18,7 +18,7 @@ function SpinningKnot() {
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
       <mesh ref={ref}>
         <torusKnotGeometry args={[1, 0.3, 128, 32]} />
-        <meshStandardMaterial color="#6C5CE7" roughness={0.3} metalness={0.6} />
+        <meshStandardMaterial color="#DC2645" roughness={0.3} metalness={0.6} />
       </mesh>
     </Float>
   );

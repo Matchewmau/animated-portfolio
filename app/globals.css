@@ -20,6 +20,20 @@ body {
   color: #fafaf9;
 }
 
+.font-script {
+  font-family: "Allura", "Segoe Script", cursive;
+}
+
+.hero-floor-shadow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(10, 10, 11, 0.45) 0%,
+    rgba(10, 10, 11, 0.22) 40%,
+    transparent 70%
+  );
+  filter: blur(8px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
