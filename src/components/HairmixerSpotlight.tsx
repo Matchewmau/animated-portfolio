@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getProject } from "@/content/projects";
+import SafeImage from "@/components/SafeImage";
 
 export default function HairmixerSpotlight() {
   const project = getProject("hairmixer-ai");
@@ -12,7 +12,7 @@ export default function HairmixerSpotlight() {
   return (
     <section aria-label="Hairmixer spotlight" className="w-full bg-ink text-paper">
       <div className="mx-auto grid max-w-5xl items-center gap-10 px-6 py-16 sm:py-20 md:grid-cols-2">
-        <div>
+        <div className="lg:sticky lg:top-24 lg:self-start">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent">
             Spotlight — {project.year}
           </p>
@@ -63,12 +63,13 @@ export default function HairmixerSpotlight() {
           </div>
         </div>
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-paper/10">
-          <Image
+          <SafeImage
             src={project.image}
             alt={`${project.title} screenshot`}
-            fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
+            fallbackTitle={project.title}
+            fallbackMetric={project.metrics[0]}
           />
         </div>
       </div>

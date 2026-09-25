@@ -7,7 +7,12 @@ html {
 }
 
 body {
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+:focus-visible {
+  outline: 2px solid #6c5ce7;
+  outline-offset: 2px;
 }
 
 ::selection {

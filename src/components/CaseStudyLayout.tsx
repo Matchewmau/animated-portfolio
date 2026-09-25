@@ -1,8 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/types";
+import { projects } from "@/content/projects";
+import SafeImage from "@/components/SafeImage";
 
 export default function CaseStudyLayout({ project }: { project: Project }) {
+  const index = projects.findIndex((p) => p.slug === project.slug);
+  const next = index >= 0 ? projects[(index + 1) % projects.length] : undefined;
+  const showNext = next && next.slug !== project.slug;
+
   return (
     <article className="mx-auto max-w-4xl px-6 py-16">
       <Link href="/#work" className="text-sm font-semibold text-accent hover:underline">
@@ -31,13 +36,14 @@ export default function CaseStudyLayout({ project }: { project: Project }) {
         ))}
       </div>
       <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl border border-ink/10 bg-ink/5">
-        <Image
+        <SafeImage
           src={project.image}
           alt={`${project.title} hero`}
-          fill
           sizes="100vw"
-          className="object-cover"
           priority
+          className="object-cover"
+          fallbackTitle={project.title}
+          fallbackMetric={project.metrics[0]}
         />
       </div>
       <div className="mt-10">
@@ -53,12 +59,13 @@ export default function CaseStudyLayout({ project }: { project: Project }) {
           key={src}
           className="relative mt-6 aspect-[3/2] overflow-hidden rounded-2xl border border-ink/10 bg-ink/5"
         >
-          <Image
+          <SafeImage
             src={src}
             alt={`${project.title} detail`}
-            fill
             sizes="100vw"
             className="object-cover"
+            fallbackTitle={project.title}
+            fallbackMetric={project.metrics[0]}
           />
         </div>
       ))}
@@ -80,6 +87,20 @@ export default function CaseStudyLayout({ project }: { project: Project }) {
           View code
         </a>
       </div>
+      {showNext ? (
+        <nav aria-label="Next project" className="mt-12 rounded-2xl border border-ink/10 p-6">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">
+            Next project
+          </p>
+          <Link
+            href={`/projects/${next.slug}`}
+            className="mt-2 block font-display text-2xl font-bold tracking-tight hover:text-accent"
+          >
+            {next.title} →
+          </Link>
+          <p className="mt-1 text-sm text-muted">{next.tagline}</p>
+        </nav>
+      ) : null}
     </article>
   );
 }

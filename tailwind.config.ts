@@ -11,8 +11,8 @@ const config: Config = {
         muted: "#71717A",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "Inter", "ui-sans-serif", "sans-serif"],
+        sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Space Grotesk", "Inter", "ui-sans-serif", "sans-serif"],
       },
     },
   },

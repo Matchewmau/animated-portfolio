@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/types";
+import SafeImage from "@/components/SafeImage";
 
 interface ProjectCardProps {
   project: Project;
@@ -13,12 +13,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       className="group block overflow-hidden rounded-2xl border border-ink/10 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink/5">
-        <Image
+        <SafeImage
           src={project.image}
           alt={`${project.title} screenshot`}
-          fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover transition duration-300 group-hover:scale-[1.02]"
+          fallbackTitle={project.title}
+          fallbackMetric={project.metrics[0]}
         />
       </div>
       <div className="p-6">

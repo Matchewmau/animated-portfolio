@@ -1,24 +1,23 @@
 import dynamic from "next/dynamic";
 import { profile } from "@/content/profile";
 import MagneticButton from "@/components/MagneticButton";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import Hero3DFallback from "@/components/Hero3DFallback";
 
 const Hero3DBackground = dynamic(
   () => import("@/components/Hero3DBackground"),
   {
     ssr: false,
-    loading: () => (
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-paper"
-      />
-    ),
+    loading: () => <Hero3DFallback />,
   }
 );
 
 export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <Hero3DBackground />
+      <ErrorBoundary fallback={<Hero3DFallback />}>
+        <Hero3DBackground />
+      </ErrorBoundary>
       <div className="mx-auto max-w-5xl px-6 py-24 sm:py-32">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
           {profile.location}
