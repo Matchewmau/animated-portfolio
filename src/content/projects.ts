@@ -17,8 +17,8 @@ export const projects: Project[] = [
       "Built a tuned ResNet50 classifier with an optimized OpenCV pipeline and a lightweight FastAPI inference service behind a responsive React UI.",
     outcome:
       "Cut inference latency by 40% and earned acceptance at ECAI 2026 with a working end-to-end demo.",
-    image: "/projects/hairmixer-ai.png",
-    gallery: ["/projects/hairmixer-ai.png"],
+    image: "/projects/hairmixer-hero.png",
+    gallery: ["/projects/hairmixer-hero.png", "/projects/hairmixer-book.png"],
     liveUrl: "https://github.com/matchewmau",
     repoUrl: "https://github.com/matchewmau",
     featured: true,
@@ -39,8 +39,8 @@ export const projects: Project[] = [
       "Led the team to ship Laravel modules with RBAC, queued notifications, indexed queries, and a Tailwind UI tuned for low-end devices.",
     outcome:
       "Reduced admin overhead by 35% with consistent sub-200ms page responses in production use.",
-    image: "/projects/pconnect.png",
-    gallery: ["/projects/pconnect.png"],
+    image: "/projects/pconnect-hero.png",
+    gallery: ["/projects/pconnect-hero.png"],
     liveUrl: "https://github.com/matchewmau",
     repoUrl: "https://github.com/matchewmau",
     featured: true,
@@ -61,8 +61,8 @@ export const projects: Project[] = [
       "Built an MVC PHP/MySQL app with automated membership lifecycles, attendance tracking, and printable billing reports.",
     outcome:
       "Cut gym paperwork by 50% and gave staff a single source of truth for daily operations.",
-    image: "/projects/tj-fitness.png",
-    gallery: ["/projects/tj-fitness.png"],
+    image: "/projects/tj-fitness-hero.png",
+    gallery: ["/projects/tj-fitness-hero.png"],
     liveUrl: "https://github.com/matchewmau",
     repoUrl: "https://github.com/matchewmau",
     featured: true,
