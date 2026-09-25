@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Oswald, Allura } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -12,9 +12,16 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const oswald = Oswald({
   subsets: ["latin"],
   variable: "--font-display",
+  display: "swap",
+});
+
+const allura = Allura({
+  subsets: ["latin"],
+  variable: "--font-script",
+  weight: ["400"],
   display: "swap",
 });
 
@@ -56,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} bg-paper font-sans text-ink antialiased`}
+        className={`${inter.variable} ${oswald.variable} ${allura.variable} bg-paper font-sans text-ink antialiased`}
       >
         <a
           href="#main"

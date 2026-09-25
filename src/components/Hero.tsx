@@ -24,6 +24,14 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center select-none overflow-hidden"
+      >
+        <span className="whitespace-nowrap font-display text-[18vw] font-bold uppercase leading-none tracking-tight text-transparent [-webkit-text-stroke:1px_rgba(220,38,69,0.08)] lg:text-[12rem]">
+          MAURICIO
+        </span>
+      </span>
       <ErrorBoundary fallback={<Hero3DFallback />}>
         <Hero3DBackground />
       </ErrorBoundary>
@@ -35,7 +43,7 @@ export default function Hero() {
           <p className="text-sm font-semibold uppercase tracking-widest text-accent">
             {profile.location}
           </p>
-          <p className="font-script mt-6 text-4xl leading-none text-[#DC2645]">
+          <p className="font-script mt-6 text-4xl leading-none text-accent">
             Hello, I&apos;m
           </p>
           <p className="mt-2 font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl">
@@ -75,7 +83,7 @@ export default function Hero() {
               height={2400}
               priority
               sizes="(max-width: 1024px) 70vw, 380px"
-              className="mx-auto h-full w-auto object-contain [filter:drop-shadow(0_24px_48px_rgba(220,38,69,0.35))]"
+              className="mx-auto h-full w-auto object-contain text-accent/35 [filter:drop-shadow(0_24px_48px_currentColor)]"
             />
           </div>
           <div
@@ -94,7 +102,7 @@ export default function Hero() {
               <li key={stat.label} className="flex items-start gap-3">
                 <span
                   aria-hidden="true"
-                  className="mt-0.5 font-display text-xl font-bold leading-none text-[#DC2645]"
+                  className="mt-0.5 font-display text-xl font-bold leading-none text-accent"
                 >
                   +
                 </span>
