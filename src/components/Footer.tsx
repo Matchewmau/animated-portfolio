@@ -17,6 +17,10 @@ export default function Footer() {
           ·{" "}
           <a href={profile.github} className="hover:text-accent">
             GitHub
+          </a>{" "}
+          ·{" "}
+          <a href={profile.resumeUrl} download className="hover:text-accent">
+            Resume
           </a>
         </p>
       </div>

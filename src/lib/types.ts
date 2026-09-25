@@ -26,7 +26,7 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  level: string;
+  level?: string;
 }
 
 export interface SkillGroup {

@@ -13,7 +13,7 @@ export default function SkillsMatrix() {
             description="What I use daily to ship full-time quality work."
           />
         </ScrollReveal>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {skillGroups.map((group, i) => (
             <ScrollReveal key={group.title} delay={i * 0.08}>
               <div className="rounded-2xl border border-ink/10 bg-white p-6">

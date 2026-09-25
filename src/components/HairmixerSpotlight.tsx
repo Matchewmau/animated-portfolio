@@ -30,6 +30,21 @@ export default function HairmixerSpotlight() {
               </li>
             ))}
           </ul>
+          <ol className="mt-6 space-y-2 text-sm text-paper/80" aria-label="Hairmixer pipeline">
+            <li>1. Upload — user submits a selfie</li>
+            <li>2. Preprocess — normalize and clean the image with OpenCV</li>
+            <li>3. Face Align — detect and align facial landmarks</li>
+            <li>4. ResNet50 Classify — predict face-shape class</li>
+            <li>5. Recommend — rank hairstyles for the predicted shape</li>
+            <li>6. Render — simulate the selected hairstyle</li>
+          </ol>
+          <blockquote className="mt-6 rounded-xl border border-paper/15 bg-paper/5 p-4 text-sm text-paper/80">
+            <p>
+              “HairMixer: A Hairstyle Recommendation and Simulation System Based
+              on Facial Structure Using CNNs” — accepted for ECAI 2026
+              presentation and publication.
+            </p>
+          </blockquote>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/projects/hairmixer-ai"

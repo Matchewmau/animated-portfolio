@@ -30,6 +30,13 @@ export default function Hero() {
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <MagneticButton href="#work">View selected work</MagneticButton>
           <a
+            href={profile.resumeUrl}
+            download
+            className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
+          >
+            Download Resume
+          </a>
+          <a
             href={`mailto:${profile.email}`}
             className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
           >

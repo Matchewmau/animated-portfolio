@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
 
 export default function SelectedWork() {
-  const featured = projects.filter((project) => project.featured).slice(0, 2);
+  const featured = projects.filter((project) => project.featured);
 
   return (
     <section id="work" className="w-full">
@@ -13,10 +13,10 @@ export default function SelectedWork() {
           <SectionHeading
             eyebrow="Selected work"
             title="Production apps, not demos"
-            description="Featured production work with real users and measurable outcomes."
+            description="Three shipped projects with real users and measurable outcomes."
           />
         </ScrollReveal>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featured.map((project, i) => (
             <ScrollReveal key={project.slug} delay={i * 0.1}>
               <ProjectCard project={project} />
