@@ -9,7 +9,7 @@ export default function Contact() {
         <SectionHeading
           eyebrow="Contact"
           title="Open to full-time roles"
-          description="Based in Zamboanga City, open to full-time. Replies within 24 hours."
+          description="Based in Zamboanga City, open to remote or on-site full-time roles. Replies within 24 hours."
         />
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
@@ -17,6 +17,12 @@ export default function Contact() {
             className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:bg-accent"
           >
             Email me
+          </a>
+          <a
+            href={`tel:${profile.phone.replace(/[^\d+]/g, "")}`}
+            className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
+          >
+            Call
           </a>
           <a
             href={profile.linkedin}

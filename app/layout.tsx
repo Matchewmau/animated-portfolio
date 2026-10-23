@@ -3,7 +3,7 @@ import { Inter, Oswald, Allura } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import { siteUrl, siteName, siteDescription } from "@/lib/seo";
+import { siteUrl, siteName, siteDescription, siteKeywords } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
+  keywords: siteKeywords,
   openGraph: {
     type: "website",
     url: siteUrl,
