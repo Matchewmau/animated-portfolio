@@ -22,6 +22,8 @@ describe("Hero", () => {
 
     expect(section).toHaveAttribute("data-world", "cyan");
     expect(screen.getByText("Cyan Ripple")).toBeInTheDocument();
+    expect(screen.getByText("ECAI 2026")).toBeInTheDocument();
+    expect(screen.queryByText("-50%")).not.toBeInTheDocument();
 
     await user.click(screen.getByRole("radio", { name: "Crimson" }));
     expect(section).toHaveAttribute("data-world", "crimson");

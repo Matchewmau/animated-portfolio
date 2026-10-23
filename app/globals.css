@@ -490,6 +490,14 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: clamp(24px, 5vw, 56px);
   }
+
+  .hero-proof li:first-child {
+    padding-top: 12px;
+  }
+
+  .hero-proof li:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -517,6 +525,14 @@ body {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 1.25rem;
+  }
+
+  .hero-proof li:first-child {
+    padding-top: 12px;
+  }
+
+  .hero-proof li:nth-last-child(-n + 2) {
+    border-bottom: none;
   }
 
   .hero-readout {
