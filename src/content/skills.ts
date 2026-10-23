@@ -6,9 +6,10 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "Python" },
       { name: "JavaScript ES6+" },
+      { name: "TypeScript" },
       { name: "PHP" },
       { name: "C++" },
-      { name: "SQL" },
+      { name: "SQL (MySQL, PostgreSQL)" },
       { name: "HTML" },
       { name: "CSS" },
     ],
@@ -16,14 +17,14 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Frameworks",
     skills: [
-      { name: "React" },
+      { name: "React.js" },
       { name: "Next.js" },
       { name: "Node.js" },
       { name: "Express" },
       { name: "Laravel" },
       { name: "Django" },
       { name: "FastAPI" },
-      { name: "Tailwind" },
+      { name: "Tailwind CSS" },
     ],
   },
   {
@@ -32,19 +33,21 @@ export const skillGroups: SkillGroup[] = [
       { name: "CNNs" },
       { name: "ResNet50" },
       { name: "OpenCV" },
-      { name: "LLM APIs" },
+      { name: "Generative AI & LLM APIs" },
+      { name: "Deep Learning" },
     ],
   },
   {
     title: "Tools",
     skills: [
       { name: "Git" },
+      { name: "GitHub" },
       { name: "Docker" },
       { name: "Postman" },
-      { name: "Linux" },
+      { name: "Linux/Bash CLI" },
       { name: "Vercel" },
       { name: "Figma" },
-      { name: "REST" },
+      { name: "RESTful APIs" },
     ],
   },
 ];

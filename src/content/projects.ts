@@ -4,19 +4,19 @@ export const projects: Project[] = [
   {
     slug: "hairmixer-ai",
     title: "HairMixer AI",
-    tagline: "CNN-powered hairstyle recommendation accepted at ECAI 2026",
+    tagline: "CNN-powered hairstyle recommendation accepted for publication at ECAI 2026",
     year: "2026",
-    role: "Lead Developer & Researcher",
-    stack: ["Python", "ResNet50", "OpenCV", "React", "FastAPI"],
-    metrics: ["-40% inference latency", "ECAI 2026 accepted", "CNN face-shape classifier"],
+    role: "Lead Developer & Lead Researcher",
+    stack: ["Python", "ResNet50", "OpenCV", "React.js", "FastAPI"],
+    metrics: ["-40% inference latency", "ECAI 2026 published", "CNN face-shape classifier"],
     description:
-      "HairMixer is an AI system that recommends hairstyles from a selfie using a ResNet50-based face-shape classifier with an OpenCV preprocessing pipeline, served through a FastAPI backend and a React front end.",
+      "HairMixer is an AI system that recommends hairstyles from a selfie using a ResNet50-based face-shape classifier with an OpenCV pipeline, served through a FastAPI backend and a React.js front end.",
     challenge:
-      "Hairstyle advice was generic and face-shape classification was too slow for interactive use.",
+      "Generic hairstyle advice ignored facial structure, and face-shape classification was too slow for interactive previews.",
     solution:
-      "Built a tuned ResNet50 classifier with an optimized OpenCV pipeline and a lightweight FastAPI inference service behind a responsive React UI.",
+      "Built a tuned ResNet50 classifier, an optimized OpenCV pipeline, and a lightweight FastAPI inference service behind a responsive React.js UI.",
     outcome:
-      "Cut inference latency by 40% and earned acceptance at ECAI 2026 with a working end-to-end demo.",
+      "Cut inference and rendering latency by 40% and earned presentation and publication acceptance at ECAI 2026.",
     image: "/projects/hairmixer-1.png",
     gallery: ["/projects/hairmixer-1.png", "/projects/hairmixer-2.png", "/projects/hairmixer-3.png", "/projects/hairmixer-4.png", "/projects/hairmixer-5.png"],
     liveUrl: "https://github.com/matchewmau",
@@ -26,19 +26,23 @@ export const projects: Project[] = [
   {
     slug: "pconnect",
     title: "PConnect",
-    tagline: "Campus connection platform with RBAC and sub-200ms pages",
+    tagline: "Multi-tenant B2B distribution platform with RBAC and sub-200ms APIs",
     year: "2025–2026",
     role: "Project Manager & Lead Developer",
     stack: ["Laravel", "PHP", "MySQL", "JavaScript", "Tailwind CSS"],
-    metrics: ["-35% admin overhead", "sub-200ms page response", "Role-based access control"],
+    metrics: [
+      "-35% manual processing",
+      "sub-200ms API response",
+      "RBAC + multi-tier commissions",
+    ],
     description:
-      "PConnect is a campus platform connecting students, faculty, and admin with announcements, records, and role-based workflows built on Laravel and MySQL.",
+      "PConnect is a multi-tenant B2B commerce platform bridging regional suppliers and bulk commercial retailers, with role-based access, tiered commissions, and real-time inventory synchronization.",
     challenge:
-      "Campus communication was fragmented and manual admin work consumed staff hours every week.",
+      "Regional suppliers and bulk retailers depended on fragmented ordering, manual commissions, and inventory updates that did not scale.",
     solution:
-      "Led the team to ship Laravel modules with RBAC, queued notifications, indexed queries, and a Tailwind UI tuned for low-end devices.",
+      "Directed full-cycle agile development and database architecture; shipped RBAC, multi-tier commission models, real-time inventory sync, and optimized Eloquent/REST endpoints.",
     outcome:
-      "Reduced admin overhead by 35% with consistent sub-200ms page responses in production use.",
+      "Reduced manual order processing overhead by 35% while sustaining sub-200ms API responses under heavy transactional reads.",
     image: "/projects/pconnect-1.jpg",
     gallery: ["/projects/pconnect-1.jpg", "/projects/pconnect-2.jpg", "/projects/pconnect-3.jpg"],
     liveUrl: "https://github.com/matchewmau",
@@ -48,19 +52,23 @@ export const projects: Project[] = [
   {
     slug: "tj-fitness",
     title: "TJ Fitness Gym Management",
-    tagline: "MVC membership system that cut gym paperwork by half",
+    tagline: "Centralized gym management from onboarding to renewals",
     year: "2024",
     role: "Full-Stack Developer",
     stack: ["PHP", "MySQL", "JavaScript", "Tailwind CSS", "Git"],
-    metrics: ["-50% paperwork", "Automated memberships", "MVC architecture"],
+    metrics: [
+      "Centralized member records",
+      "Automated renewals",
+      "MVC + Git workflow",
+    ],
     description:
-      "A gym management system for TJ Fitness handling members, plans, attendance, and billing with an MVC PHP backend and a Tailwind interface.",
+      "A gym management system for TJ Fitness handling member onboarding, subscription renewals, daily attendance, and financial tracking with an MVC PHP backend and responsive admin dashboards.",
     challenge:
-      "Membership tracking ran on paper logs and spreadsheets, causing errors and slow renewals.",
+      "Membership tracking ran on paper logs and spreadsheets, causing errors, missed renewals, and slow front-desk work.",
     solution:
-      "Built an MVC PHP/MySQL app with automated membership lifecycles, attendance tracking, and printable billing reports.",
+      "Built an MVC PHP/MySQL app with automated membership lifecycles, daily attendance, financial tracking, and automated expiry notifications.",
     outcome:
-      "Cut gym paperwork by 50% and gave staff a single source of truth for daily operations.",
+      "Gave staff a single source of truth for daily operations and reduced front-desk administrative paperwork.",
     image: "/projects/tj-fitness-1.png",
     gallery: ["/projects/tj-fitness-1.png", "/projects/tj-fitness-2.png", "/projects/tj-fitness-3.png"],
     liveUrl: "https://github.com/matchewmau",
