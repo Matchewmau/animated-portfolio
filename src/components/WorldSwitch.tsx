@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, type CSSProperties, type KeyboardEvent } from "react";
+import { useRef, type CSSProperties, type KeyboardEvent } from "react";
 import { WORLD_IDS, WORLDS, type WorldId } from "@/lib/gridWorlds";
 
 interface WorldSwitchProps {
