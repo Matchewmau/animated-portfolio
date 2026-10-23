@@ -63,6 +63,40 @@ describe("grid renderer", () => {
     renderer.destroy();
   });
 
+  it("snaps the palette on a reduced-motion world switch", () => {
+    const canvas = makeCanvas();
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("expected a mocked 2D context");
+
+    const strokes: unknown[] = [];
+    let strokeStyle: unknown = "";
+    Object.defineProperty(ctx, "strokeStyle", {
+      configurable: true,
+      get: () => strokeStyle,
+      set: (value: unknown) => {
+        strokeStyle = value;
+        strokes.push(value);
+      },
+    });
+
+    const renderer = createGridRenderer({
+      canvas,
+      world: "cyan",
+      reducedMotion: true,
+    });
+
+    renderer.start();
+    renderer.setWorld("crimson");
+
+    expect(
+      strokes.some(
+        (value) => typeof value === "string" && value.startsWith("rgba(220,38,69,")
+      )
+    ).toBe(true);
+
+    renderer.destroy();
+  });
+
   it("survives a missing 2D context", () => {
     const canvas = makeCanvas();
     const spy = vi

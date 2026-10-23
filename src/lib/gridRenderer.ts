@@ -760,7 +760,15 @@ export function createGridRenderer(
     worldId = nextWorld;
     form = getWorld(nextWorld).form;
     target = paletteFor(nextWorld);
-    if (reducedMotion) drawFrame(performance.now());
+    if (reducedMotion) {
+      cur = {
+        bg: { ...target.bg },
+        grid: { ...target.grid },
+        grid2: { ...target.grid2 },
+        glow: { ...target.glow },
+      };
+      drawFrame(performance.now());
+    }
   }
 
   function localPoint(event: PointerEvent): { x: number; y: number } | null {
