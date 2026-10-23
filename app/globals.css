@@ -34,6 +34,35 @@ body {
   filter: blur(8px);
 }
 
+.hero-grid-fallback {
+  background:
+    radial-gradient(
+      ellipse at 50% 42%,
+      color-mix(in srgb, var(--hero-glow, #35e6ff) 16%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--hero-bg, #02060d) 0%,
+      color-mix(in srgb, var(--hero-bg, #02060d) 80%, #000) 100%
+    );
+}
+
+.hero-grid-fallback::before {
+  content: "";
+  position: absolute;
+  inset: 55% -20% -20%;
+  background-image:
+    linear-gradient(var(--hero-line, #5ff7ff) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hero-line, #5ff7ff) 1px, transparent 1px);
+  background-size: 52px 52px;
+  transform: perspective(500px) rotateX(62deg);
+  transform-origin: 50% 0;
+  opacity: 0.18;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, transparent 85%);
+  mask-image: linear-gradient(to bottom, transparent, black 25%, transparent 85%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
