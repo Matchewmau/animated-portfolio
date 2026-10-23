@@ -1,71 +1,106 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { profile } from "@/content/profile";
 import MagneticButton from "@/components/MagneticButton";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import Hero3DFallback from "@/components/Hero3DFallback";
+import HeroGrid from "@/components/HeroGrid";
+import HeroGridFallback from "@/components/HeroGridFallback";
+import WorldSwitch from "@/components/WorldSwitch";
+import { DEFAULT_WORLD, WORLDS, type WorldId } from "@/lib/gridWorlds";
 
-const Hero3DBackground = dynamic(
-  () => import("@/components/Hero3DBackground"),
-  {
-    ssr: false,
-    loading: () => <Hero3DFallback />,
-  }
+// The qualifying stat is the published ECAI 2026 paper, not a percentage.
+const proof = profile.proof.map((stat) =>
+  stat.value === "-50%"
+    ? { value: "ECAI 2026", label: "Published presenter" }
+    : stat
 );
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const [worldId, setWorldId] = useState<WorldId>(DEFAULT_WORLD);
+  const [switching, setSwitching] = useState(false);
+  const switchTimer = useRef<number | null>(null);
+  const world = WORLDS[worldId];
   const { scrollY } = useScroll();
   const portraitY = useTransform(scrollY, [0, 600], [0, 12]);
   const textY = useTransform(scrollY, [0, 600], [0, -12]);
 
+  const style = {
+    "--hero-bg": world.palette.bg,
+    "--hero-fg": world.palette.fg,
+    "--hero-dim": world.palette.dim,
+    "--hero-line": world.palette.line,
+    "--hero-line-2": world.palette.line2,
+    "--hero-glow": world.palette.glow,
+    "--hero-panel": world.palette.panel,
+    "--hero-panel-border": world.palette.panelBorder,
+    "--hero-word-stroke": world.palette.wordStroke,
+    "--hero-rim": world.palette.rim,
+    "--hero-shadow": world.palette.shadow,
+    "--hero-vignette": world.palette.vignette,
+    "--hero-thumb-bg": world.palette.thumbBg,
+    "--hero-thumb-fg": world.palette.thumbFg,
+    "--hero-grain": world.palette.grainOpacity,
+  } as CSSProperties;
+
+  useEffect(() => {
+    return () => {
+      if (switchTimer.current !== null) {
+        window.clearTimeout(switchTimer.current);
+      }
+    };
+  }, []);
+
+  function handleWorldChange(next: WorldId) {
+    setWorldId(next);
+    setSwitching(true);
+    if (switchTimer.current !== null) {
+      window.clearTimeout(switchTimer.current);
+    }
+    switchTimer.current = window.setTimeout(() => setSwitching(false), 650);
+  }
+
   return (
-    <section id="top" className="relative overflow-hidden">
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center select-none overflow-hidden"
-      >
-        <span className="whitespace-nowrap font-display text-[18vw] font-bold uppercase leading-none tracking-tight text-transparent [-webkit-text-stroke:1px_rgba(220,38,69,0.08)] lg:text-[12rem]">
-          MAURICIO
-        </span>
-      </span>
-      <ErrorBoundary fallback={<Hero3DFallback />}>
-        <Hero3DBackground />
+    <section
+      id="top"
+      data-world={worldId}
+      style={style}
+      className={`hero-stage ${switching ? "switching" : ""} relative isolate flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-[color:var(--hero-bg)] transition-colors duration-700`}
+    >
+      <HeroGridFallback world={worldId} />
+      <ErrorBoundary fallback={null}>
+        <HeroGrid world={worldId} reducedMotion={Boolean(reduceMotion)} />
       </ErrorBoundary>
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 sm:py-32 lg:grid-cols-[1.1fr_auto_0.8fr] lg:items-center">
+
+      <div className="hero-vignette" aria-hidden="true" />
+      <div className="hero-scanlines" aria-hidden="true" />
+      <div className="hero-grain" aria-hidden="true" />
+      <div className="hero-giant-word" aria-hidden="true">MAURICIO</div>
+      <div key={`flash-${worldId}`} className="hero-flash" aria-hidden="true" />
+      <div key={`sweep-${worldId}`} className="hero-sweep" aria-hidden="true" />
+      <div className="hero-bottom-fade" aria-hidden="true" />
+
+      <div className="relative z-[3] mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-12 px-6 pb-16 pt-16 sm:pt-20 md:grid-cols-[1.1fr_auto] md:content-center min-[1100px]:grid-cols-[1.1fr_auto_0.8fr] min-[1100px]:items-center">
         <motion.div
           style={reduceMotion ? { y: 0 } : { y: textY }}
-          className="relative z-10"
+          className="hero-copy"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent">
-            {profile.location}
-          </p>
-          <p className="font-script mt-6 text-4xl leading-none text-accent">
-            Hello, I&apos;m
-          </p>
-          <p className="mt-2 font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl">
-            {profile.name}
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-bold tracking-tight sm:text-6xl">
-            {profile.headline}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted">{profile.subhead}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <MagneticButton href="#work">View selected work</MagneticButton>
-            <a
-              href={profile.resumeUrl}
-              download
-              className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
-            >
+          <p className="hero-location">{profile.location}</p>
+          <p className="hero-hello">Hello, I&rsquo;m</p>
+          <p className="hero-name">{profile.name}</p>
+          <h1 className="hero-headline">{profile.headline}</h1>
+          <p className="hero-subhead">{profile.subhead}</p>
+          <div className="hero-actions">
+            <MagneticButton href="#work" tone="hero">
+              View selected work
+            </MagneticButton>
+            <a href={profile.resumeUrl} download className="hero-btn-ghost">
               Download Resume
             </a>
-            <a
-              href={`mailto:${profile.email}`}
-              className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
-            >
+            <a href={`mailto:${profile.email}`} className="hero-btn-ghost">
               Get in touch
             </a>
           </div>
@@ -73,51 +108,51 @@ export default function Hero() {
 
         <motion.div
           style={reduceMotion ? { y: 0 } : { y: portraitY }}
-          className="relative z-[5] mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[380px]"
+          className="hero-portrait-wrap"
         >
-          <div className="relative aspect-[2/3] w-full">
-            <Image
-              src="/portrait/hero-profile.webp"
-              alt="Portrait of John Mauricio"
-              width={1600}
-              height={2400}
-              priority
-              sizes="(max-width: 1024px) 70vw, 380px"
-              className="mx-auto h-full w-auto object-contain text-accent/35 [filter:drop-shadow(0_24px_48px_currentColor)]"
-            />
-          </div>
-          <div
-            aria-hidden="true"
-            className="hero-floor-shadow absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2"
+          <div className="hero-portrait-halo" aria-hidden="true" />
+          <div className="hero-portrait-ring" aria-hidden="true" />
+          <div className="hero-portrait-floor" aria-hidden="true" />
+          <Image
+            src="/portrait/hero-profile.webp"
+            alt="Portrait of John Mauricio"
+            width={1600}
+            height={2400}
+            priority
+            sizes="(max-width: 1024px) 70vw, 380px"
+            className="hero-portrait-img"
           />
+          <span className="hero-portrait-label">Subject 01 / Mauricio</span>
         </motion.div>
 
         <motion.aside
           style={reduceMotion ? { y: 0 } : { y: textY }}
           aria-label="Highlights"
-          className="relative z-10"
+          className="hero-proof"
         >
-          <ul className="space-y-5">
-            {profile.proof.map((stat) => (
-              <li key={stat.label} className="flex items-start gap-3">
-                <span
-                  aria-hidden="true"
-                  className="mt-0.5 font-display text-xl font-bold leading-none text-accent"
-                >
+          <ul>
+            {proof.map((stat) => (
+              <li key={stat.label}>
+                <span aria-hidden="true" className="hero-proof-plus">
                   +
                 </span>
                 <span>
-                  <span className="block font-display text-2xl font-bold tracking-tight">
-                    {stat.value}
-                  </span>
-                  <span className="mt-1 block text-sm text-muted">
-                    {stat.label}
-                  </span>
+                  <span className="hero-proof-value">{stat.value}</span>
+                  <span className="hero-proof-label">{stat.label}</span>
                 </span>
               </li>
             ))}
           </ul>
         </motion.aside>
+      </div>
+
+      <div className="relative z-20 flex w-full flex-col items-center gap-3 px-6 pb-6">
+        <div className="hero-readout" aria-live="polite">
+          <span className="hero-readout-index">{world.index}</span>
+          <span className="hero-readout-name">{world.name}</span>
+          <span className="hero-readout-desc">{world.description}</span>
+        </div>
+        <WorldSwitch value={worldId} onChange={handleWorldChange} />
       </div>
     </section>
   );
