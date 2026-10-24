@@ -34,6 +34,7 @@ interface Pulse {
 }
 
 const BLACK: Rgb = { r: 0, g: 0, b: 0 };
+const WHITE: Rgb = { r: 255, g: 255, b: 255 };
 
 export function hexToRgb(hex: string): Rgb {
   let value = hex.trim().replace(/^#/, "");
@@ -463,16 +464,16 @@ export function createGridRenderer(
     const cx = w * 0.5 + (px - w * 0.5) * 0.06;
 
     const sky = ctx.createLinearGradient(0, 0, 0, horizon);
-    sky.addColorStop(0, "#f8efe4");
-    sky.addColorStop(0.55, "#f1ddc9");
-    sky.addColorStop(1, "#e6c2a0");
+    sky.addColorStop(0, rgba(mixRgb(cur.bg, WHITE, 0.25), 1));
+    sky.addColorStop(0.55, rgba(mixRgb(cur.bg, cur.grid2, 0.06), 1));
+    sky.addColorStop(1, rgba(mixRgb(cur.bg, cur.grid2, 0.25), 1));
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, w, horizon + 1);
 
     const ground = ctx.createLinearGradient(0, horizon, 0, h);
-    ground.addColorStop(0, "#e8c9aa");
-    ground.addColorStop(0.25, "#f0dcc5");
-    ground.addColorStop(1, "#dcb38d");
+    ground.addColorStop(0, rgba(mixRgb(cur.bg, cur.grid2, 0.22), 1));
+    ground.addColorStop(0.25, rgba(mixRgb(cur.bg, cur.grid2, 0.08), 1));
+    ground.addColorStop(1, rgba(mixRgb(cur.bg, cur.grid2, 0.38), 1));
     ctx.fillStyle = ground;
     ctx.fillRect(0, horizon, w, h - horizon);
 
@@ -494,7 +495,7 @@ export function createGridRenderer(
       const y = sunY - sunR * 0.5 + i * sunR * 0.34;
       const band = Math.sqrt(Math.max(0, sunR * sunR - Math.pow(y - sunY, 2)));
       ctx.fillStyle =
-        i % 2 === 0 ? "rgba(243, 232, 218, 0.62)" : "rgba(243, 232, 218, 0.35)";
+        i % 2 === 0 ? rgba(cur.bg, 0.62) : rgba(cur.bg, 0.35);
       ctx.fillRect(cx - band, y, band * 2, 2.5);
     }
 
@@ -513,7 +514,7 @@ export function createGridRenderer(
         if (x === -10) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
-      ctx.strokeStyle = "rgba(90, 45, 25, " + alpha + ")";
+      ctx.strokeStyle = rgba(cur.grid, alpha);
       ctx.lineWidth = 1;
       ctx.stroke();
     }
@@ -551,7 +552,7 @@ export function createGridRenderer(
       for (let s = 1; s < points.length; s += 1) {
         ctx.lineTo(points[s][0], points[s][1]);
       }
-      ctx.strokeStyle = "rgba(105, 54, 30, 0.26)";
+      ctx.strokeStyle = rgba(cur.grid, 0.26);
       ctx.lineWidth = 1;
       ctx.stroke();
     }
@@ -575,7 +576,7 @@ export function createGridRenderer(
       for (let s = 1; s < points.length; s += 1) {
         ctx.lineTo(points[s][0], points[s][1]);
       }
-      ctx.strokeStyle = "rgba(110, 56, 30, " + alpha + ")";
+      ctx.strokeStyle = rgba(cur.grid, alpha);
       ctx.lineWidth = raw > 0.7 ? 1.25 : 0.9;
       ctx.stroke();
     }
@@ -588,7 +589,7 @@ export function createGridRenderer(
         horizon + ((seed * 7.3 + Math.sin(t * 0.5 + i) * 20) % (h - horizon + 80)) - 40;
       ctx.beginPath();
       ctx.arc(x, y, 0.8 + (i % 3) * 0.5, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(120, 60, 30, 0.22)";
+      ctx.fillStyle = rgba(cur.grid, 0.22);
       ctx.fill();
     }
 
@@ -717,10 +718,10 @@ export function createGridRenderer(
 
   function drawFrame(now: number): void {
     updatePointer(now);
-    cur.bg = mixRgb(cur.bg, target.bg, 0.045);
-    cur.grid = mixRgb(cur.grid, target.grid, 0.055);
-    cur.grid2 = mixRgb(cur.grid2, target.grid2, 0.055);
-    cur.glow = mixRgb(cur.glow, target.glow, 0.055);
+    cur.bg = mixRgb(cur.bg, target.bg, 0.075);
+    cur.grid = mixRgb(cur.grid, target.grid, 0.085);
+    cur.grid2 = mixRgb(cur.grid2, target.grid2, 0.085);
+    cur.glow = mixRgb(cur.glow, target.glow, 0.085);
 
     ctx.clearRect(0, 0, w, h);
 
