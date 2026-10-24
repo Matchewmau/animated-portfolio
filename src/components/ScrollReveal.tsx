@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -15,8 +16,13 @@ export default function ScrollReveal({
   className,
 }: ScrollRevealProps) {
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
 
-  if (reduceMotion) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (mounted && reduceMotion) {
     return <>{children}</>;
   }
 
