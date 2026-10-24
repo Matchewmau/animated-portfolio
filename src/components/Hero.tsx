@@ -11,13 +11,6 @@ import HeroGridFallback from "@/components/HeroGridFallback";
 import WorldSwitch from "@/components/WorldSwitch";
 import { DEFAULT_WORLD, WORLDS, type WorldId } from "@/lib/gridWorlds";
 
-// The qualifying stat is the published ECAI 2026 paper, not a percentage.
-const proof = profile.proof.map((stat) =>
-  stat.value === "-50%"
-    ? { value: "ECAI 2026", label: "Published presenter" }
-    : stat
-);
-
 export default function Hero() {
   const reduceMotion = useReducedMotion();
   const [worldId, setWorldId] = useState<WorldId>(DEFAULT_WORLD);
@@ -131,7 +124,7 @@ export default function Hero() {
           className="hero-proof"
         >
           <ul>
-            {proof.map((stat) => (
+            {profile.proof.map((stat) => (
               <li key={stat.label}>
                 <span aria-hidden="true" className="hero-proof-plus">
                   +
