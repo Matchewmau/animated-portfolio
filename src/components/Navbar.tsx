@@ -14,7 +14,7 @@ export default function Navbar() {
         <a href="#top" className="font-display text-lg font-bold tracking-tight">
           JM.
         </a>
-        <div className="flex items-center gap-5 text-sm">
+        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-sm sm:gap-x-5">
           {links.map((link) => (
             <a key={link.href} href={link.href} className="hover:text-accent">
               {link.label}
@@ -23,7 +23,7 @@ export default function Navbar() {
           <a
             href={profile.resumeUrl}
             download
-            className="rounded-full border border-ink/15 px-4 py-1.5 font-medium hover:border-accent hover:text-accent"
+            className="rounded-full border border-ink/15 px-3 py-1.5 font-medium hover:border-accent hover:text-accent sm:px-4"
           >
             Resume
           </a>
