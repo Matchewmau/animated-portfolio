@@ -224,11 +224,11 @@ body {
 }
 
 .hero-subhead {
-  max-width: 44ch;
+  max-width: 48ch;
   margin: clamp(18px, 2.5vh, 26px) 0 0;
   color: var(--hero-dim);
-  font-size: clamp(0.82rem, 1.05vw, 0.96rem);
-  line-height: 1.65;
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  line-height: 1.58;
   transition: color 0.7s ease;
 }
 
@@ -236,11 +236,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  margin-top: clamp(22px, 3.4vh, 36px);
+  gap: 8px;
+  margin-top: clamp(18px, 2.8vh, 28px);
 }
 
 .hero-btn-primary {
+  padding: 11px 20px;
   background: var(--hero-line-2);
   color: var(--hero-bg);
   box-shadow: 0 0 28px -6px var(--hero-glow);
@@ -259,7 +260,7 @@ body {
   justify-content: center;
   border: 1px solid var(--hero-panel-border);
   border-radius: 999px;
-  padding: 12px 21px;
+  padding: 11px 19px;
   background: color-mix(in srgb, var(--hero-panel) 62%, transparent);
   color: var(--hero-fg);
   font-size: 11px;

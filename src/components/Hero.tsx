@@ -61,7 +61,7 @@ export default function Hero() {
       id="top"
       data-world={worldId}
       style={style}
-      className={`hero-stage ${switching ? "switching" : ""} relative isolate flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-[color:var(--hero-bg)] transition-colors duration-700`}
+      className={`hero-stage ${switching ? "switching" : ""} relative isolate flex min-h-[calc(100svh-4.2rem)] flex-col overflow-hidden bg-[color:var(--hero-bg)] transition-colors duration-700`}
     >
       <HeroGridFallback world={worldId} />
       <ErrorBoundary fallback={null}>
@@ -76,7 +76,7 @@ export default function Hero() {
       <div key={`sweep-${worldId}`} className="hero-sweep" aria-hidden="true" />
       <div className="hero-bottom-fade" aria-hidden="true" />
 
-      <div className="relative z-[3] mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-12 px-6 pb-16 pt-16 sm:pt-20 md:grid-cols-[1.1fr_auto] md:content-center min-[1100px]:grid-cols-[1.1fr_auto_0.8fr] min-[1100px]:items-center">
+      <div className="relative z-[3] mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-10 px-6 pb-10 pt-12 sm:pt-14 md:grid-cols-[1.1fr_auto] md:content-center min-[1100px]:grid-cols-[1.35fr_auto_0.55fr] min-[1100px]:items-center min-[1100px]:pb-8 min-[1100px]:pt-10">
         <motion.div
           style={reduceMotion ? { y: 0 } : { y: textY }}
           className="hero-copy"
@@ -139,7 +139,7 @@ export default function Hero() {
         </motion.aside>
       </div>
 
-      <div className="relative z-20 flex w-full flex-col items-center gap-3 px-6 pb-6">
+      <div className="relative z-20 flex w-full flex-col items-center gap-2 px-6 pb-4">
         <div className="hero-readout" aria-live="polite">
           <span className="hero-readout-index">{world.index}</span>
           <span className="hero-readout-name">{world.name}</span>
