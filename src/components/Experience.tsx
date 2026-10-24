@@ -39,7 +39,7 @@ export default function Experience() {
             </p>
             <p className="mt-2 text-sm text-muted">
               Relevant coursework: Data Structures &amp; Algorithms, Software Engineering,
-              Database Systems, Web Design, Web Programming, AI
+              Database Systems, Web Designing, Web Programming, AI
             </p>
           </article>
           <article className="rounded-2xl border border-ink/10 p-6 sm:p-8">
