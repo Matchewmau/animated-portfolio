@@ -473,7 +473,7 @@ body {
 }
 
 .hero-readout-desc {
-  max-width: 42ch;
+  max-width: 50ch;
   opacity: 0.8;
   letter-spacing: 0.02em;
   line-height: 1.4;
