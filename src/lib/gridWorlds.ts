@@ -7,6 +7,7 @@ export interface WorldPalette {
   dim: string;
   line: string;
   line2: string;
+  accentText: string;
   glow: string;
   panel: string;
   panelBorder: string;
@@ -46,6 +47,7 @@ export const WORLDS: Record<WorldId, WorldDefinition> = {
       dim: "rgba(244, 248, 255, 0.62)",
       line: "#5FF7FF",
       line2: "#B9FFFF",
+      accentText: "#B9FFFF",
       glow: "#35E6FF",
       panel: "rgba(4, 12, 20, 0.55)",
       panelBorder: "rgba(120, 245, 255, 0.24)",
@@ -71,6 +73,7 @@ export const WORLDS: Record<WorldId, WorldDefinition> = {
       dim: "rgba(255, 245, 247, 0.62)",
       line: "#DC2645",
       line2: "#FF97A8",
+      accentText: "#FF97A8",
       glow: "#FF2C52",
       panel: "rgba(20, 2, 7, 0.55)",
       panelBorder: "rgba(255, 90, 120, 0.28)",
@@ -93,9 +96,10 @@ export const WORLDS: Record<WorldId, WorldDefinition> = {
     palette: {
       bg: "#F3E8DA",
       fg: "#1C130D",
-      dim: "rgba(28, 19, 13, 0.62)",
+      dim: "rgba(28, 19, 13, 0.7)",
       line: "#8A3A1E",
       line2: "#C2410C",
+      accentText: "#A63A12",
       glow: "#FF7A3D",
       panel: "rgba(255, 250, 243, 0.58)",
       panelBorder: "rgba(80, 30, 10, 0.18)",
@@ -103,7 +107,7 @@ export const WORLDS: Record<WorldId, WorldDefinition> = {
       rim: "rgba(255, 122, 61, 0.7)",
       shadow: "rgba(70, 35, 15, 0.25)",
       vignette: "rgba(120, 70, 30, 0.16)",
-      thumbBg: "#C2410C",
+      thumbBg: "#A63A12",
       thumbFg: "#FFF8F0",
       grainOpacity: 0.035,
     },

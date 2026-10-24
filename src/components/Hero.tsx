@@ -27,6 +27,7 @@ export default function Hero() {
     "--hero-dim": world.palette.dim,
     "--hero-line": world.palette.line,
     "--hero-line-2": world.palette.line2,
+    "--hero-accent-text": world.palette.accentText,
     "--hero-glow": world.palette.glow,
     "--hero-panel": world.palette.panel,
     "--hero-panel-border": world.palette.panelBorder,
@@ -76,7 +77,7 @@ export default function Hero() {
       <div key={`sweep-${worldId}`} className="hero-sweep" aria-hidden="true" />
       <div className="hero-bottom-fade" aria-hidden="true" />
 
-      <div className="relative z-[3] mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-10 px-6 pb-10 pt-12 sm:pt-14 md:grid-cols-[1.1fr_auto] md:content-center min-[1100px]:grid-cols-[1.35fr_auto_0.55fr] min-[1100px]:items-center min-[1100px]:pb-8 min-[1100px]:pt-10">
+      <div className="hero-content relative z-[3] mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-10 px-6 pb-10 pt-12 sm:pt-14 md:grid-cols-[1.1fr_auto] md:content-center min-[1100px]:grid-cols-[1.35fr_auto_0.55fr] min-[1100px]:items-center min-[1100px]:pb-4 min-[1100px]:pt-10">
         <motion.div
           style={reduceMotion ? { y: 0 } : { y: textY }}
           className="hero-copy"
@@ -139,7 +140,7 @@ export default function Hero() {
         </motion.aside>
       </div>
 
-      <div className="relative z-20 flex w-full flex-col items-center gap-2 px-6 pb-4">
+      <div className="hero-footer relative z-20 flex w-full flex-col items-center gap-1 px-6 pb-1">
         <div className="hero-readout" aria-live="polite">
           <span className="hero-readout-index">{world.index}</span>
           <span className="hero-readout-name">{world.name}</span>

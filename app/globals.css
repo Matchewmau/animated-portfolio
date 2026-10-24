@@ -186,7 +186,7 @@ body {
 
 .hero-location {
   margin: 0;
-  color: var(--hero-line-2);
+  color: var(--hero-accent-text);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -242,7 +242,7 @@ body {
 
 .hero-btn-primary {
   padding: 11px 20px;
-  background: var(--hero-line-2);
+  background: var(--hero-accent-text);
   color: var(--hero-bg);
   box-shadow: 0 0 28px -6px var(--hero-glow);
   text-transform: uppercase;
@@ -374,13 +374,12 @@ body {
   left: 50%;
   bottom: -8%;
   transform: translateX(-50%);
-  color: var(--hero-dim);
+  color: var(--hero-fg);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   white-space: nowrap;
-  opacity: 0.75;
   transition: color 0.7s ease;
 }
 
@@ -416,7 +415,7 @@ body {
 
 .hero-proof-plus {
   margin-top: 1px;
-  color: var(--hero-line-2);
+  color: var(--hero-accent-text);
   font-family: var(--font-display), "Oswald", ui-sans-serif, sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
@@ -447,18 +446,26 @@ body {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  width: min(92vw, 720px);
+  width: auto;
+  max-width: min(92vw, 760px);
+  padding: 4px 12px;
+  border: 1px solid
+    color-mix(in srgb, var(--hero-panel-border) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hero-bg) 84%, transparent);
   justify-content: center;
   color: var(--hero-dim);
   font-size: 10px;
   letter-spacing: 0.09em;
   text-align: center;
   pointer-events: none;
-  transition: color 0.7s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: color 0.7s ease, background 0.7s ease, border-color 0.7s ease;
 }
 
 .hero-readout-index {
-  color: var(--hero-line-2);
+  color: var(--hero-accent-text);
   font-family: var(--font-display), "Oswald", ui-sans-serif, sans-serif;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -474,9 +481,37 @@ body {
 
 .hero-readout-desc {
   max-width: 50ch;
-  opacity: 0.8;
   letter-spacing: 0.02em;
   line-height: 1.4;
+}
+
+@media (min-width: 1100px) and (max-height: 780px) {
+  .hero-stage .hero-content {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-stage .hero-footer {
+    padding-bottom: 0.25rem;
+  }
+
+  .hero-portrait-label {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) and (max-height: 740px) {
+  .hero-headline {
+    font-size: clamp(2.1rem, 3.6vw, 3.6rem);
+  }
+
+  .hero-subhead {
+    margin-top: 14px;
+  }
+
+  .hero-actions {
+    margin-top: 12px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1099.98px) {
@@ -615,7 +650,7 @@ body {
   padding: 8px 10px 8px 16px;
   border: 1px solid var(--hero-panel-border);
   border-radius: 999px;
-  background: var(--hero-panel);
+  background: color-mix(in srgb, var(--hero-bg) 88%, transparent);
   box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(255, 255, 255, 0.035) inset;
   backdrop-filter: blur(22px) saturate(1.15);
@@ -664,7 +699,7 @@ body {
   flex: 1 1 0;
   border: 0;
   background: transparent;
-  color: var(--hero-dim);
+  color: var(--hero-fg);
   padding: 9px 7px;
   border-radius: 999px;
   cursor: pointer;
