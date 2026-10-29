@@ -26,5 +26,6 @@ yarn-error.log*
 # design reference — never commit
 public/reference/
 
-# visual brainstorming session — never commit
+# visual brainstorming session — never commit\
+docs/
 .superpowers/
