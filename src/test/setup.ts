@@ -3,7 +3,17 @@ import { cleanup } from "@testing-library/react";
 import { afterEach, vi } from "vitest";
 
 afterEach(() => {
-  if (typeof document !== "undefined") cleanup();
+  if (typeof document !== "undefined") {
+    cleanup();
+    document.documentElement.setAttribute("data-world", "cyan");
+  }
+  if (typeof window !== "undefined") {
+    try {
+      window.sessionStorage.clear();
+    } catch {
+      // ignore blocked storage in tests
+    }
+  }
 });
 
 if (typeof window !== "undefined") {
