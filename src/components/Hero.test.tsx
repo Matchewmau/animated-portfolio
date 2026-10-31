@@ -22,6 +22,7 @@ describe("Hero", () => {
 
     expect(section).toHaveAttribute("data-world", "cyan");
     expect(container.querySelector(".hero-readout")).toBeNull();
+    expect(screen.getByRole("status")).toHaveTextContent("Cyan Ripple");
     expect(screen.getByRole("radio", { name: "Cyan" })).toHaveAttribute(
       "aria-checked",
       "true"
@@ -35,6 +36,7 @@ describe("Hero", () => {
       "aria-checked",
       "true"
     );
+    expect(screen.getByRole("status")).toHaveTextContent("Crimson Tunnel");
 
     await user.click(screen.getByRole("radio", { name: "Solar" }));
     expect(section).toHaveAttribute("data-world", "solar");
@@ -42,6 +44,7 @@ describe("Hero", () => {
       "aria-checked",
       "true"
     );
+    expect(screen.getByRole("status")).toHaveTextContent("Solar Floor");
 
     await user.click(screen.getByRole("radio", { name: "Cyan" }));
     expect(section).toHaveAttribute("data-world", "cyan");
@@ -49,5 +52,6 @@ describe("Hero", () => {
       "aria-checked",
       "true"
     );
+    expect(screen.getByRole("status")).toHaveTextContent("Cyan Ripple");
   });
 });

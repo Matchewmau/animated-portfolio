@@ -78,6 +78,9 @@ export default function WorldSwitch({
           </button>
         ))}
       </div>
+      <span role="status" aria-atomic="true" className="sr-only">
+        {WORLDS[value].name}
+      </span>
     </div>
   );
 }
