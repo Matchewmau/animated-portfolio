@@ -960,3 +960,28 @@ footer {
 .site-footer-link:hover {
   color: var(--world-accent);
 }
+
+.proof-value {
+  color: var(--world-fg);
+}
+
+.proof-label {
+  color: var(--world-dim);
+}
+
+.project-card {
+  color: var(--world-fg);
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+}
+
+.project-card-media {
+  border-bottom: 1px solid var(--world-soft-line);
+  background: color-mix(in srgb, var(--world-fg) 6%, transparent);
+}
+
+.project-card-tagline {
+  color: var(--world-dim);
+}
