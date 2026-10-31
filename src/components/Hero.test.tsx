@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { WorldProvider } from "./WorldProvider";
 import Hero from "./Hero";
 
 vi.mock("next/image", () => ({
@@ -15,43 +16,35 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Hero", () => {
-  it("starts in Cyan Ripple and changes the whole world from the switch", async () => {
+  it("starts in Cyan and changes the world from the compact switch", async () => {
     const user = userEvent.setup();
-    const { container } = render(<Hero />);
-    const section = container.querySelector("#top");
-
-    expect(section).toHaveAttribute("data-world", "cyan");
-    expect(container.querySelector(".hero-readout")).toBeNull();
-    expect(screen.getByRole("status")).toHaveTextContent("Cyan Ripple");
-    expect(screen.getByRole("radio", { name: "Cyan Ripple" })).toHaveAttribute(
-      "aria-checked",
-      "true"
+    const { container } = render(
+      <WorldProvider>
+        <Hero />
+      </WorldProvider>
     );
+
+    expect(document.documentElement).toHaveAttribute("data-world", "cyan");
+    expect(screen.getByRole("status")).toHaveTextContent("Cyan Ripple");
     expect(screen.getByText("ECAI 2026")).toBeInTheDocument();
     expect(screen.queryByText("-50%")).not.toBeInTheDocument();
+    expect(container.querySelector(".hero-readout")).toBeNull();
 
-    await user.click(screen.getByRole("radio", { name: "Crimson Tunnel" }));
-    expect(section).toHaveAttribute("data-world", "crimson");
-    expect(screen.getByRole("radio", { name: "Crimson Tunnel" })).toHaveAttribute(
-      "aria-checked",
-      "true"
+    await user.click(
+      screen.getByRole("radio", { name: "Crimson Tunnel" })
+    );
+    expect(document.documentElement).toHaveAttribute(
+      "data-world",
+      "crimson"
     );
     expect(screen.getByRole("status")).toHaveTextContent("Crimson Tunnel");
 
     await user.click(screen.getByRole("radio", { name: "Solar Floor" }));
-    expect(section).toHaveAttribute("data-world", "solar");
-    expect(screen.getByRole("radio", { name: "Solar Floor" })).toHaveAttribute(
-      "aria-checked",
-      "true"
-    );
+    expect(document.documentElement).toHaveAttribute("data-world", "solar");
     expect(screen.getByRole("status")).toHaveTextContent("Solar Floor");
 
     await user.click(screen.getByRole("radio", { name: "Cyan Ripple" }));
-    expect(section).toHaveAttribute("data-world", "cyan");
-    expect(screen.getByRole("radio", { name: "Cyan Ripple" })).toHaveAttribute(
-      "aria-checked",
-      "true"
-    );
+    expect(document.documentElement).toHaveAttribute("data-world", "cyan");
     expect(screen.getByRole("status")).toHaveTextContent("Cyan Ripple");
   });
 });

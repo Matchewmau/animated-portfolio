@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { profile } from "@/content/profile";
 import MagneticButton from "@/components/MagneticButton";
@@ -9,36 +9,17 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import HeroGrid from "@/components/HeroGrid";
 import HeroGridFallback from "@/components/HeroGridFallback";
 import WorldSwitch from "@/components/WorldSwitch";
-import { DEFAULT_WORLD, WORLDS, type WorldId } from "@/lib/gridWorlds";
+import { useWorld } from "@/components/WorldProvider";
+import { type WorldId } from "@/lib/gridWorlds";
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
-  const [worldId, setWorldId] = useState<WorldId>(DEFAULT_WORLD);
+  const { world, ready, setWorld } = useWorld();
   const [switching, setSwitching] = useState(false);
   const switchTimer = useRef<number | null>(null);
-  const world = WORLDS[worldId];
   const { scrollY } = useScroll();
   const portraitY = useTransform(scrollY, [0, 600], [0, 12]);
   const textY = useTransform(scrollY, [0, 600], [0, -12]);
-
-  const style = {
-    "--hero-bg": world.palette.bg,
-    "--hero-fg": world.palette.fg,
-    "--hero-dim": world.palette.dim,
-    "--hero-line": world.palette.line,
-    "--hero-line-2": world.palette.line2,
-    "--hero-accent-text": world.palette.accentText,
-    "--hero-glow": world.palette.glow,
-    "--hero-panel": world.palette.panel,
-    "--hero-panel-border": world.palette.panelBorder,
-    "--hero-word-stroke": world.palette.wordStroke,
-    "--hero-rim": world.palette.rim,
-    "--hero-shadow": world.palette.shadow,
-    "--hero-vignette": world.palette.vignette,
-    "--hero-thumb-bg": world.palette.thumbBg,
-    "--hero-thumb-fg": world.palette.thumbFg,
-    "--hero-grain": world.palette.grainOpacity,
-  } as CSSProperties;
 
   useEffect(() => {
     return () => {
@@ -49,7 +30,7 @@ export default function Hero() {
   }, []);
 
   function handleWorldChange(next: WorldId) {
-    setWorldId(next);
+    setWorld(next);
     setSwitching(true);
     if (switchTimer.current !== null) {
       window.clearTimeout(switchTimer.current);
@@ -60,21 +41,21 @@ export default function Hero() {
   return (
     <section
       id="top"
-      data-world={worldId}
-      style={style}
       className={`hero-stage ${switching ? "switching" : ""} relative isolate flex min-h-[calc(100svh-4.2rem)] flex-col overflow-hidden bg-[color:var(--hero-bg)] transition-colors duration-700`}
     >
-      <HeroGridFallback world={worldId} />
-      <ErrorBoundary fallback={null}>
-        <HeroGrid world={worldId} reducedMotion={Boolean(reduceMotion)} />
-      </ErrorBoundary>
+      <HeroGridFallback />
+      {ready ? (
+        <ErrorBoundary fallback={null}>
+          <HeroGrid world={world} reducedMotion={Boolean(reduceMotion)} />
+        </ErrorBoundary>
+      ) : null}
 
       <div className="hero-vignette" aria-hidden="true" />
       <div className="hero-scanlines" aria-hidden="true" />
       <div className="hero-grain" aria-hidden="true" />
       <div className="hero-giant-word" aria-hidden="true">MAURICIO</div>
-      <div key={`flash-${worldId}`} className="hero-flash" aria-hidden="true" />
-      <div key={`sweep-${worldId}`} className="hero-sweep" aria-hidden="true" />
+      <div key={`flash-${world}`} className="hero-flash" aria-hidden="true" />
+      <div key={`sweep-${world}`} className="hero-sweep" aria-hidden="true" />
       <div className="hero-bottom-fade" aria-hidden="true" />
 
       <div className="hero-content relative z-[3] mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-10 px-6 pb-10 pt-12 sm:pt-14 md:grid-cols-[1.1fr_auto] md:content-center min-[1100px]:grid-cols-[1.35fr_auto_0.55fr] min-[1100px]:items-center min-[1100px]:pb-4 min-[1100px]:pt-10">
@@ -141,7 +122,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-footer relative z-20 flex w-full flex-col items-center gap-1 px-6 pb-1">
-        <WorldSwitch value={worldId} onChange={handleWorldChange} />
+        <WorldSwitch value={world} onChange={handleWorldChange} />
       </div>
     </section>
   );
