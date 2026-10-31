@@ -141,11 +141,6 @@ export default function Hero() {
       </div>
 
       <div className="hero-footer relative z-20 flex w-full flex-col items-center gap-1 px-6 pb-1">
-        <div className="hero-readout" aria-live="polite">
-          <span className="hero-readout-index">{world.index}</span>
-          <span className="hero-readout-name">{world.name}</span>
-          <span className="hero-readout-desc">{world.description}</span>
-        </div>
         <WorldSwitch value={worldId} onChange={handleWorldChange} />
       </div>
     </section>
