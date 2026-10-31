@@ -1010,3 +1010,28 @@ footer {
   border-color: var(--world-panel-border);
   background: color-mix(in srgb, var(--world-fg) 6%, transparent);
 }
+
+.skill-group {
+  border-top: 1px solid var(--world-soft-line);
+  padding-top: 1rem;
+}
+
+.skill-group::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 1px;
+  margin-bottom: 1rem;
+  background: var(--world-accent);
+  box-shadow: 0 0 12px var(--world-glow);
+}
+
+.skill-group-title {
+  color: var(--world-fg);
+}
+
+@media (max-width: 767px) {
+  .skill-group {
+    padding-block: 1rem;
+  }
+}

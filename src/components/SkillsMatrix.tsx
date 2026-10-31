@@ -16,16 +16,13 @@ export default function SkillsMatrix() {
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {skillGroups.map((group, i) => (
             <ScrollReveal key={group.title} delay={i * 0.08}>
-              <div className="rounded-2xl border border-ink/10 bg-white p-6">
-                <h3 className="font-display text-lg font-bold tracking-tight">
+              <div className="skill-group">
+                <h3 className="skill-group-title font-display text-lg font-bold tracking-tight">
                   {group.title}
                 </h3>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
-                    <li
-                      key={skill.name}
-                      className="rounded-full border border-ink/10 bg-paper px-3 py-1 text-sm font-medium"
-                    >
+                    <li key={skill.name} className="ghost-pill">
                       {skill.name}
                     </li>
                   ))}
