@@ -23,32 +23,32 @@ describe("Hero", () => {
     expect(section).toHaveAttribute("data-world", "cyan");
     expect(container.querySelector(".hero-readout")).toBeNull();
     expect(screen.getByRole("status")).toHaveTextContent("Cyan Ripple");
-    expect(screen.getByRole("radio", { name: "Cyan" })).toHaveAttribute(
+    expect(screen.getByRole("radio", { name: "Cyan Ripple" })).toHaveAttribute(
       "aria-checked",
       "true"
     );
     expect(screen.getByText("ECAI 2026")).toBeInTheDocument();
     expect(screen.queryByText("-50%")).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole("radio", { name: "Crimson" }));
+    await user.click(screen.getByRole("radio", { name: "Crimson Tunnel" }));
     expect(section).toHaveAttribute("data-world", "crimson");
-    expect(screen.getByRole("radio", { name: "Crimson" })).toHaveAttribute(
+    expect(screen.getByRole("radio", { name: "Crimson Tunnel" })).toHaveAttribute(
       "aria-checked",
       "true"
     );
     expect(screen.getByRole("status")).toHaveTextContent("Crimson Tunnel");
 
-    await user.click(screen.getByRole("radio", { name: "Solar" }));
+    await user.click(screen.getByRole("radio", { name: "Solar Floor" }));
     expect(section).toHaveAttribute("data-world", "solar");
-    expect(screen.getByRole("radio", { name: "Solar" })).toHaveAttribute(
+    expect(screen.getByRole("radio", { name: "Solar Floor" })).toHaveAttribute(
       "aria-checked",
       "true"
     );
     expect(screen.getByRole("status")).toHaveTextContent("Solar Floor");
 
-    await user.click(screen.getByRole("radio", { name: "Cyan" }));
+    await user.click(screen.getByRole("radio", { name: "Cyan Ripple" }));
     expect(section).toHaveAttribute("data-world", "cyan");
-    expect(screen.getByRole("radio", { name: "Cyan" })).toHaveAttribute(
+    expect(screen.getByRole("radio", { name: "Cyan Ripple" })).toHaveAttribute(
       "aria-checked",
       "true"
     );
