@@ -985,3 +985,28 @@ footer {
 .project-card-tagline {
   color: var(--world-dim);
 }
+
+.spotlight-panel {
+  color: var(--world-fg);
+}
+
+.spotlight-panel:hover {
+  border-color: var(--world-panel-border);
+  box-shadow: 0 24px 70px -44px var(--world-shadow);
+}
+
+.spotlight-copy,
+.spotlight-pipeline {
+  color: var(--world-dim);
+}
+
+.spotlight-quote {
+  border-color: var(--world-soft-line);
+  background: color-mix(in srgb, var(--world-bg) 24%, transparent);
+  color: var(--world-dim);
+}
+
+.spotlight-media {
+  border-color: var(--world-panel-border);
+  background: color-mix(in srgb, var(--world-fg) 6%, transparent);
+}
