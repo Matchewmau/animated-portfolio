@@ -14,13 +14,12 @@ export default function WorldSwitch({
   onChange,
   className = "",
 }: WorldSwitchProps) {
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const activeIndex = WORLD_IDS.indexOf(value);
+  const dotRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   function select(next: WorldId) {
     onChange(next);
     const index = WORLD_IDS.indexOf(next);
-    tabRefs.current[index]?.focus();
+    dotRefs.current[index]?.focus();
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
@@ -45,36 +44,29 @@ export default function WorldSwitch({
 
   return (
     <div className={`world-switch ${className}`.trim()}>
-      <span id="world-switch-label" className="world-switch-label">
-        World
-      </span>
       <div
         role="radiogroup"
-        aria-labelledby="world-switch-label"
-        className="world-switch-tabs"
+        aria-label="Grid world"
+        className="world-switch-dots"
         onKeyDown={handleKeyDown}
       >
-        <span
-          className="world-switch-thumb"
-          data-testid="world-switch-thumb"
-          style={{ "--i": activeIndex } as CSSProperties}
-          aria-hidden="true"
-        />
         {WORLD_IDS.map((id, index) => (
           <button
             key={id}
             ref={(node) => {
-              tabRefs.current[index] = node;
+              dotRefs.current[index] = node;
             }}
             type="button"
             role="radio"
             aria-checked={value === id}
+            aria-label={WORLDS[id].name}
             tabIndex={value === id ? 0 : -1}
             data-world={id}
-            className="world-switch-tab"
+            className="world-switch-dot"
+            style={{ "--dot": WORLDS[id].palette.thumbBg } as CSSProperties}
             onClick={() => onChange(id)}
           >
-            {WORLDS[id].label}
+            <span aria-hidden="true" className="world-switch-dot-core" />
           </button>
         ))}
       </div>

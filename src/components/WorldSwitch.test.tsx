@@ -4,30 +4,32 @@ import { describe, expect, it, vi } from "vitest";
 import WorldSwitch from "./WorldSwitch";
 
 describe("WorldSwitch", () => {
-  it("renders three radios and marks the active world", () => {
+  it("renders three compact radios with accessible names", () => {
     render(<WorldSwitch value="crimson" onChange={() => {}} />);
 
-    expect(screen.getByRole("radiogroup", { name: "World" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("radiogroup", { name: "Grid world" })
+    ).toBeInTheDocument();
     expect(screen.getAllByRole("radio")).toHaveLength(3);
-    expect(screen.getByRole("radio", { name: "Crimson" })).toHaveAttribute(
-      "aria-checked",
-      "true"
-    );
-    expect(screen.getByRole("radio", { name: "Cyan" })).toHaveAttribute(
-      "aria-checked",
-      "false"
-    );
+    expect(
+      screen.getByRole("radio", { name: "Crimson Tunnel" })
+    ).toHaveAttribute("aria-checked", "true");
+    expect(
+      screen.getByRole("radio", { name: "Cyan Ripple" })
+    ).toHaveAttribute("aria-checked", "false");
+    expect(screen.getByRole("status")).toHaveTextContent("Crimson Tunnel");
 
-    const thumb = screen.getByTestId("world-switch-thumb");
-    expect(thumb.style.getPropertyValue("--i")).toBe("1");
+    expect(screen.queryByText("World")).not.toBeInTheDocument();
+    expect(screen.queryByText("Cyan")).not.toBeInTheDocument();
+    expect(screen.queryByText("Crimson")).not.toBeInTheDocument();
   });
 
-  it("changes the whole world on click", async () => {
+  it("changes the world on click", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<WorldSwitch value="cyan" onChange={onChange} />);
 
-    await user.click(screen.getByRole("radio", { name: "Solar" }));
+    await user.click(screen.getByRole("radio", { name: "Solar Floor" }));
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith("solar");
@@ -38,15 +40,19 @@ describe("WorldSwitch", () => {
     const onChange = vi.fn();
     render(<WorldSwitch value="cyan" onChange={onChange} />);
 
-    screen.getByRole("radio", { name: "Cyan" }).focus();
+    screen.getByRole("radio", { name: "Cyan Ripple" }).focus();
     await user.keyboard("{ArrowLeft}");
 
     expect(onChange).toHaveBeenCalledWith("solar");
-    expect(screen.getByRole("radio", { name: "Solar" })).toHaveFocus();
+    expect(
+      screen.getByRole("radio", { name: "Solar Floor" })
+    ).toHaveFocus();
 
     await user.keyboard("{Home}");
 
     expect(onChange).toHaveBeenCalledWith("cyan");
-    expect(screen.getByRole("radio", { name: "Cyan" })).toHaveFocus();
+    expect(
+      screen.getByRole("radio", { name: "Cyan Ripple" })
+    ).toHaveFocus();
   });
 });
