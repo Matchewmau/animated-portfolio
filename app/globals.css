@@ -1048,3 +1048,12 @@ footer {
 .experience-bullets {
   color: var(--world-dim);
 }
+
+.safe-image-fallback {
+  background: linear-gradient(
+    135deg,
+    var(--world-bg) 0%,
+    color-mix(in srgb, var(--world-accent-fill) 70%, var(--world-bg)) 100%
+  );
+  color: var(--world-fg);
+}

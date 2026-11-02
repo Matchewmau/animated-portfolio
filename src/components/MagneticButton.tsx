@@ -30,7 +30,7 @@ export default function MagneticButton({
   const className =
     tone === "hero"
       ? "hero-btn-primary inline-block rounded-full px-6 py-3 text-sm font-semibold transition"
-      : "inline-block rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:bg-accent";
+      : "btn-primary inline-block";
 
   const disableMotion = mounted && Boolean(reduceMotion);
 

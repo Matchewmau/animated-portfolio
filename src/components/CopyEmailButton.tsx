@@ -36,11 +36,11 @@ export default function CopyEmailButton({ email }: { email: string }) {
       <button
         type="button"
         onClick={handleCopy}
-        className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
+        className="btn-secondary"
       >
         Copy email
       </button>
-      <p aria-live="polite" className="min-h-5 text-sm text-muted">
+      <p aria-live="polite" className="muted-copy min-h-5 text-sm">
         {status === "copied"
           ? "Email copied to clipboard."
           : status === "manual"
