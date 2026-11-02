@@ -1057,3 +1057,25 @@ footer {
   );
   color: var(--world-fg);
 }
+
+.case-study {
+  color: var(--world-fg);
+}
+
+.case-study-tagline,
+.case-study-body {
+  color: var(--world-dim);
+}
+
+.case-study-media {
+  border-color: var(--world-panel-border);
+  background: color-mix(in srgb, var(--world-fg) 6%, transparent);
+}
+
+.case-study-next {
+  color: var(--world-fg);
+}
+
+.case-study-next:hover {
+  transform: none;
+}
