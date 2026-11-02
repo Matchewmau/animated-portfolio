@@ -1035,3 +1035,16 @@ footer {
     padding-block: 1rem;
   }
 }
+
+.experience-panel {
+  color: var(--world-fg);
+}
+
+.experience-panel:hover {
+  transform: none;
+}
+
+.experience-meta,
+.experience-bullets {
+  color: var(--world-dim);
+}
