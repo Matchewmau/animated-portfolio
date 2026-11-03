@@ -29,12 +29,12 @@ export default function SafeImage({
       <div
         role="img"
         aria-label={alt}
-        className="absolute inset-0 flex flex-col items-start justify-end gap-1 bg-gradient-to-br from-ink via-ink/90 to-accent/80 p-5 text-paper"
+        className="safe-image-fallback absolute inset-0 flex flex-col items-start justify-end gap-1 p-5"
       >
         {fallbackTitle ? (
           <p className="font-display text-lg font-bold leading-tight">{fallbackTitle}</p>
         ) : null}
-        {fallbackMetric ? <p className="text-xs font-semibold text-paper/70">{fallbackMetric}</p> : null}
+        {fallbackMetric ? <p className="text-xs font-semibold muted-copy">{fallbackMetric}</p> : null}
       </div>
     );
   }

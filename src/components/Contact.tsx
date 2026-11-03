@@ -9,20 +9,26 @@ export default function Contact() {
         <SectionHeading
           eyebrow="Contact"
           title="Open to full-time roles"
-          description="Based in Zamboanga City, open to full-time. Replies within 24 hours."
+          description="Based in Zamboanga City, open to remote or on-site full-time roles. Replies within 24 hours."
         />
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
             href={`mailto:${profile.email}?subject=Full-time%20opportunity%20for%20${encodeURIComponent(profile.name)}`}
-            className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:bg-accent"
+            className="btn-primary"
           >
             Email me
+          </a>
+          <a
+            href={`tel:${profile.phone.replace(/[^\d+]/g, "")}`}
+            className="btn-secondary"
+          >
+            Call
           </a>
           <a
             href={profile.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
+            className="btn-secondary"
           >
             LinkedIn
           </a>
@@ -30,14 +36,14 @@ export default function Contact() {
             href={profile.github}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
+            className="btn-secondary"
           >
             GitHub
           </a>
           <CopyEmailButton email={profile.email} />
         </div>
         <p className="mt-6 text-sm text-muted">
-          <a href={`mailto:${profile.email}`} className="hover:text-accent">
+          <a href={`mailto:${profile.email}`} className="world-link">
             {profile.email}
           </a>
         </p>

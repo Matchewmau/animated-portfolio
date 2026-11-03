@@ -3,7 +3,12 @@ import { Inter, Oswald, Allura } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import { siteUrl, siteName, siteDescription } from "@/lib/seo";
+import SiteGrid from "@/components/SiteGrid";
+import { WorldProvider } from "@/components/WorldProvider";
+import { DEFAULT_WORLD } from "@/lib/gridWorlds";
+import { getWorldBootScript } from "@/lib/worldStorage";
+import { getWorldThemeCss } from "@/lib/worldTheme";
+import { siteUrl, siteName, siteDescription, siteKeywords } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,6 +37,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
+  keywords: siteKeywords,
   openGraph: {
     type: "website",
     url: siteUrl,
@@ -59,22 +65,39 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      data-world={DEFAULT_WORLD}
+      suppressHydrationWarning
+    >
+      <head>
+        <style
+          id="world-theme"
+          dangerouslySetInnerHTML={{ __html: getWorldThemeCss() }}
+        />
+        <script
+          dangerouslySetInnerHTML={{ __html: getWorldBootScript() }}
+        />
+      </head>
       <body
-        className={`${inter.variable} ${oswald.variable} ${allura.variable} bg-paper font-sans text-ink antialiased`}
+        className={`${inter.variable} ${oswald.variable} ${allura.variable} bg-[color:var(--world-bg)] font-sans text-[color:var(--world-fg)] antialiased`}
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-paper"
-        >
-          Skip to content
-        </a>
-        <SmoothScroll />
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <WorldProvider>
+          <SiteGrid />
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <SmoothScroll />
+          <Navbar />
+          <main id="main">{children}</main>
+          <Footer />
+        </WorldProvider>
       </body>
     </html>
   );

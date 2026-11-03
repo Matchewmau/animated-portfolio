@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
   }
 
   componentDidCatch(): void {
-    // Swallow WebGL errors so the static fallback renders instead.
+    // Swallow renderer errors so the static fallback remains visible.
   }
 
   render(): ReactNode {
