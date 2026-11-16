@@ -1,6 +1,6 @@
 # animated-portfolio: notes for coding agents
 
-Next.js 14 (App Router) + React 18 + Tailwind 3 + GSAP/Lenis/motion. Vitest + Testing Library (jsdom). npm (`package-lock.json`). No CI, no Node version pin (verified on Node 20.17).
+Next.js 14 (App Router) + React 18 + Tailwind 3 + GSAP/Lenis/motion. Vitest + Testing Library (jsdom). npm (`package-lock.json`). No CI. Node 22 (`.nvmrc`; `engines` allows 20.17–22.x, both verified, but 20 is EOL since 2026-04-30).
 
 ## Commands (verified 2026-11-17)
 - Install: `npm ci`
