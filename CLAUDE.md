@@ -15,12 +15,14 @@ Next.js 14 (App Router) + React 18 + Tailwind 3 + GSAP/Lenis/motion. Vitest + Te
 - `@/` means `src/` only. tsconfig `paths` and the `vitest.config.ts` alias must match; `src/test/aliases.test.ts` fails if they drift.
 - `vitest.config.ts` needs `esbuild.jsx: "automatic"` because tsconfig uses `jsx: "preserve"` for Next and no component imports `React`; without it, component tests fail.
 - `docs/`, `.superpowers/` and `public/reference/` are gitignored on purpose ("never commit"). Files written there are never tracked.
+- Tailwind scans `app/**/*.ts`, so deleting a file under `app/` while `next dev` runs can 500 the CSS build (ENOENT). Restart the dev server.
 - `app/resume/route.ts` serves the hard-coded file `public/Mauricio_Resume.pdf`; renaming the PDF breaks `/resume`.
 - Test stderr shows React warnings ("Received `true` for a non-boolean attribute `fill`") from the `next/image` mocks in component tests. They predate this file and the tests still pass.
 
 ## UI checks
 - Open the app via `.claude/launch.json` (desktop app browser pane) or Playwright. Check phone (~375px) and desktop (~1280px) widths.
 - Animated components honor `prefers-reduced-motion`; check both settings when changing motion.
+- Judge scroll, focus-scroll and animation timing only in a visible page. A hidden desktop-app browser pane runs as a background page that stalls native smooth scroll and Lenis, faking "focus lands off-screen" bugs. If the pane is hidden, drive headless Edge/Chrome over CDP.
 
 ## Layout
 - `app/`: routes: home, `projects/[slug]` case studies, `resume` (PDF download), robots, sitemap, not-found.
