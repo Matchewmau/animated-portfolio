@@ -1,6 +1,7 @@
 import { profile } from "@/content/profile";
+import MobileNavMenu, { type NavLink } from "./MobileNavMenu";
 
-const links = [
+const links: NavLink[] = [
   { label: "Work", href: "/#work" },
   { label: "Skills", href: "/#skills" },
   { label: "Experience", href: "/#experience" },
@@ -10,26 +11,33 @@ const links = [
 export default function Navbar() {
   return (
     <header className="site-nav sticky top-0 z-50 w-full">
-      <nav className="site-nav-inner mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <nav className="site-nav-inner mx-auto flex max-w-5xl items-center justify-between gap-3 px-6 py-2.5 sm:py-4">
         <a
           href="/#top"
-          className="site-nav-logo font-display text-lg font-bold tracking-tight"
+          className="site-nav-logo shrink-0 font-display text-lg font-bold tracking-tight"
         >
           JM.
         </a>
-        <div className="site-nav-links flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-sm sm:gap-x-5">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} className="site-nav-link">
-              {link.label}
-            </a>
-          ))}
+        <div className="flex items-center gap-2 text-sm sm:gap-5">
+          <div className="site-nav-links hidden items-center gap-x-5 sm:flex">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="site-nav-link whitespace-nowrap"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
           <a
             href={profile.resumeUrl}
             download
-            className="site-nav-resume font-medium"
+            className="site-nav-resume inline-flex min-h-11 items-center whitespace-nowrap font-medium sm:min-h-0"
           >
             Resume
           </a>
+          <MobileNavMenu links={links} />
         </div>
       </nav>
     </header>

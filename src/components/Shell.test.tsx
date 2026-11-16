@@ -27,6 +27,19 @@ describe("site shell", () => {
     expect(container.querySelector(".world-switch")).toBeNull();
   });
 
+  it("offers a collapsed phone menu next to the resume link", () => {
+    render(<Navbar />);
+
+    expect(screen.getByRole("button", { name: "Menu" })).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+    expect(screen.getByRole("link", { name: "Resume" })).toHaveAttribute(
+      "href",
+      "/Mauricio_Resume.pdf"
+    );
+  });
+
   it("renders a themed footer without a solid light strip", () => {
     const { container } = render(<Footer />);
     const footer = container.querySelector("footer");
