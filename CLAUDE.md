@@ -12,7 +12,7 @@ Next.js 14 (App Router) + React 18 + Tailwind 3 + GSAP/Lenis/motion. Vitest + Te
 
 ## Gotchas
 - `next dev` and `next build` share `.next/`: stop the dev server before building, or the running dev server breaks.
-- Path alias drift: tsconfig maps `@/*` to `./src/*` and `./*`, but `vitest.config.ts` maps `@` to `./src` only. `@/app/...` type-checks but fails under Vitest; keep `@/` imports pointing into `src/`.
+- `@/` means `src/` only. tsconfig `paths` and the `vitest.config.ts` alias must match; `src/test/aliases.test.ts` fails if they drift.
 - `vitest.config.ts` needs `esbuild.jsx: "automatic"` because tsconfig uses `jsx: "preserve"` for Next and no component imports `React`; without it, component tests fail.
 - `docs/`, `.superpowers/` and `public/reference/` are gitignored on purpose ("never commit"). Files written there are never tracked.
 - `app/resume/route.ts` serves the hard-coded file `public/Mauricio_Resume.pdf`; renaming the PDF breaks `/resume`.
