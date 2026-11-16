@@ -40,6 +40,19 @@ describe("site shell", () => {
     );
   });
 
+  it("gives the logo a 44px phone tap target and hides desktop links on phones", () => {
+    const { container } = render(<Navbar />);
+
+    expect(screen.getByRole("link", { name: "JM." })).toHaveClass(
+      "min-h-11",
+      "min-w-11",
+      "sm:min-h-0",
+      "sm:min-w-0"
+    );
+    const desktopLinks = container.querySelector(".site-nav-links");
+    expect(desktopLinks).toHaveClass("hidden", "sm:flex");
+  });
+
   it("renders a themed footer without a solid light strip", () => {
     const { container } = render(<Footer />);
     const footer = container.querySelector("footer");

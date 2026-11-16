@@ -14,7 +14,7 @@ export default function Navbar() {
       <nav className="site-nav-inner mx-auto flex max-w-5xl items-center justify-between gap-3 px-6 py-2.5 sm:py-4">
         <a
           href="/#top"
-          className="site-nav-logo shrink-0 font-display text-lg font-bold tracking-tight"
+          className="site-nav-logo inline-flex min-h-11 min-w-11 shrink-0 items-center font-display text-lg font-bold tracking-tight sm:min-h-0 sm:min-w-0"
         >
           JM.
         </a>

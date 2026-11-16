@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import MobileNavMenu from "./MobileNavMenu";
 
 const links = [
@@ -69,6 +69,68 @@ describe("MobileNavMenu", () => {
     fireEvent.pointerDown(screen.getByText("Outside"));
 
     expect(menuButton()).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("is hidden from the sm breakpoint up", () => {
+    render(<MobileNavMenu links={links} />);
+
+    expect(menuButton().parentElement).toHaveClass("sm:hidden");
+  });
+
+  it("closes when the viewport grows to the desktop breakpoint", async () => {
+    const user = userEvent.setup();
+    const original = window.matchMedia;
+    let onChange: ((event: { matches: boolean }) => void) | undefined;
+    window.matchMedia = ((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addEventListener: (_type: string, listener: typeof onChange) => {
+        onChange = listener;
+      },
+      removeEventListener: () => {},
+      addListener: () => {},
+      removeListener: () => {},
+      dispatchEvent: () => false,
+    })) as unknown as typeof window.matchMedia;
+    try {
+      render(<MobileNavMenu links={links} />);
+      await user.click(menuButton());
+      expect(menuButton()).toHaveAttribute("aria-expanded", "true");
+      expect(onChange).toBeDefined();
+
+      act(() => onChange?.({ matches: false }));
+      expect(menuButton()).toHaveAttribute("aria-expanded", "true");
+
+      act(() => onChange?.({ matches: true }));
+      expect(menuButton()).toHaveAttribute("aria-expanded", "false");
+    } finally {
+      window.matchMedia = original;
+    }
+  });
+
+  it("falls back to addListener where MediaQueryList lacks addEventListener", async () => {
+    const user = userEvent.setup();
+    const original = window.matchMedia;
+    const addListener = vi.fn();
+    const removeListener = vi.fn();
+    window.matchMedia = ((query: string) => ({
+      matches: false,
+      media: query,
+      addListener,
+      removeListener,
+    })) as unknown as typeof window.matchMedia;
+    try {
+      render(<MobileNavMenu links={links} />);
+      await user.click(menuButton());
+      expect(menuButton()).toHaveAttribute("aria-expanded", "true");
+      expect(addListener).toHaveBeenCalledTimes(1);
+
+      await user.click(menuButton());
+      expect(removeListener).toHaveBeenCalledTimes(1);
+    } finally {
+      window.matchMedia = original;
+    }
   });
 
   it("closes when keyboard focus moves past the last link", async () => {

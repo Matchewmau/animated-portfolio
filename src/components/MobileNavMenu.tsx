@@ -32,13 +32,17 @@ export default function MobileNavMenu({ links }: { links: NavLink[] }) {
       if (event.matches) setOpen(false);
     };
 
+    // Safari 12-13 lack MediaQueryList.addEventListener; use the legacy API there.
+    // Registered first so a failure cannot leave document listeners behind.
+    if (desktop.addEventListener) desktop.addEventListener("change", onBreakpoint);
+    else desktop.addListener(onBreakpoint);
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
-    desktop.addEventListener("change", onBreakpoint);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
-      desktop.removeEventListener("change", onBreakpoint);
+      if (desktop.removeEventListener) desktop.removeEventListener("change", onBreakpoint);
+      else desktop.removeListener(onBreakpoint);
     };
   }, [open]);
 
